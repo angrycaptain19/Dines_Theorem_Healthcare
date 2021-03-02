@@ -399,10 +399,8 @@ def print_results(file_name):
 	mock_us = [0]*(len(countries)+2)
 	us = country("United States of America")
 
-	solution_total = 0
-	for i in range(len(solution_list)-2) :
-		solution_total += float(solution_list[i])
-
+	solution_total = sum(
+	    float(solution_list[i]) for i in range(len(solution_list) - 2))
 	for i in range(len(countries)):
 
 		for j in range(len(solution_list)-2):
@@ -451,10 +449,8 @@ def save_results(file_name):
 	mock_us = [0]*(len(countries)+2)
 	us = country("United States of America")
 
-	solution_total = 0
-	for i in range(len(solution_list)-2) :
-		solution_total += float(solution_list[i])
-
+	solution_total = sum(
+	    float(solution_list[i]) for i in range(len(solution_list) - 2))
 	for i in range(len(countries)):
 
 		for j in range(len(solution_list)-2):
