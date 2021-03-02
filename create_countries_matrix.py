@@ -377,14 +377,14 @@ class country :
 				j+=1
 			i+=1
 
-def csv_search (df, condition, country_name, column):
+def csv_search(df, condition, country_name, column):
 	result = -1
 	year = 0
 	for i in range(2, len(df.index)):
-		if country_name in df.values[i,1] and condition in df.values[i,3]:
-			if int(df.values[i,2]) > year:
-				year = int(df.values[i,2])
-				result = df.values[i,column]
+		if (country_name in df.values[i, 1] and condition in df.values[i, 3]
+		    and int(df.values[i, 2]) > year):
+			year = int(df.values[i,2])
+			result = df.values[i,column]
 	return result
 
 def one_dimension_array (data,length):
@@ -428,10 +428,7 @@ for i in range (len(democracies_with_public_healthcare)):
 N = len(attributes)
 M = len(democracies_with_public_healthcare)
 
-country_list = []
-for d in democracies_with_public_healthcare:
-    country_list.append(country(d))
-
+country_list = [country(d) for d in democracies_with_public_healthcare]
 with open(country_file, 'wb') as f:
     pickle.dump(country_list,f)
     f.close()
@@ -456,12 +453,10 @@ countries = two_dimension_array(countries_data, N, M)
 file_name = "countries_matrix_" + str(N) + ".txt"
 
 with open(file_name, "w+") as fp:
-	i = 0
-	for country in countries:
+	for i, country in enumerate(countries):
 		for data in country:
 			fp.write(f"{data} ")
 		fp.write(f"-{united_states[i]}\n")
-		i += 1
 	fp.close()
 
 print(f"Created a {N} x {M} matrix.")
